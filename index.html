@@ -158,6 +158,7 @@
         <ul class="sidebar-links">
             <li onclick="showSection('trades')" id="menu-trades" class="active"><span class="icon">📈</span> JP225_V4</li>
             <li onclick="showSection('gold')" id="menu-gold"><span class="icon">🏆</span> Gold_V2</li>
+            <li onclick="showSection('prices')" id="menu-prices"><span class="icon">💎</span> Prices</li>
             <li onclick="showSection('inquiry')" id="menu-inquiry"><span class="icon">💬</span> Inquiry</li>
         </ul>
     </div>
@@ -296,6 +297,42 @@
             </section>
         </main>
 
+        <!-- Prices Section -->
+        <main id="prices-section" style="display: none;">
+            <div class="prices-container">
+                <h2 class="section-title">Select Pricing Model</h2>
+                <p class="section-subtitle">Choose a model to view subscription details</p>
+                <div class="pricing-cards">
+                    <div class="price-card jp-model" onclick="showSection('price-jp225')">
+                        <div class="card-icon">📈</div>
+                        <h3>JP225_V4 Model</h3>
+                        <p>Advanced algorithmic trading model for JP225 Cash</p>
+                        <button class="select-btn">View Pricing</button>
+                    </div>
+                    <div class="price-card gold-model" onclick="showSection('price-gold')">
+                        <div class="card-icon">🏆</div>
+                        <h3>Gold_V2 Model</h3>
+                        <p>High-frequency precision model for XAUUSD</p>
+                        <button class="select-btn">View Pricing</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <main id="price-jp225-section" style="display: none;">
+            <div class="coming-soon">
+                <h2>JP225_V4 Pricing</h2>
+                <p>Details coming soon...</p>
+            </div>
+        </main>
+
+        <main id="price-gold-section" style="display: none;">
+            <div class="coming-soon">
+                <h2>Gold_V2 Pricing</h2>
+                <p>Details coming soon...</p>
+            </div>
+        </main>
+
         <!-- Inquiry Section -->
         <main id="inquiry-section" style="display: none;">
             <div class="inquiry-container">
@@ -329,13 +366,20 @@
             document.getElementById('sidebar-overlay').classList.toggle('active');
         }
         function showSection(section) {
-            document.getElementById('trades-section').style.display = (section === 'trades') ? 'block' : 'none';
-            document.getElementById('gold-section').style.display = (section === 'gold') ? 'block' : 'none';
-            document.getElementById('inquiry-section').style.display = (section === 'inquiry') ? 'block' : 'none';
+            const sections = ['trades', 'gold', 'prices', 'inquiry', 'price-jp225', 'price-gold'];
+            sections.forEach(s => {
+                const el = document.getElementById(s + '-section');
+                if (el) el.style.display = (section === s) ? 'block' : 'none';
+            });
             
-            document.getElementById('menu-trades').classList.toggle('active', section === 'trades');
-            document.getElementById('menu-gold').classList.toggle('active', section === 'gold');
-            document.getElementById('menu-inquiry').classList.toggle('active', section === 'inquiry');
+            const menus = ['trades', 'gold', 'prices', 'inquiry'];
+            menus.forEach(s => {
+                const menuBtn = document.getElementById('menu-' + s);
+                if (menuBtn) {
+                    if (section === s) menuBtn.classList.add('active');
+                    else menuBtn.classList.remove('active');
+                }
+            });
             
             if (section === 'trades' || section === 'gold') {
                 const data = window.dashboardData[section + '-section'];

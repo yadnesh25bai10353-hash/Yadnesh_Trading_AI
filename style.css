@@ -542,6 +542,115 @@ main > section {
     font-weight: 700;
 }
 
+/* Pricing Section */
+.prices-container {
+    max-width: 900px;
+    margin: 40px auto;
+    text-align: center;
+    animation: fadeUp 0.6s ease-out forwards;
+}
+
+.section-title {
+    font-size: 36px;
+    margin-bottom: 10px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+.section-subtitle {
+    color: var(--text-muted);
+    margin-bottom: 40px;
+    font-size: 16px;
+}
+
+.pricing-cards {
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+}
+
+.price-card {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    padding: 40px 30px;
+    flex: 1;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.price-card:hover {
+    transform: translateY(-10px) scale(1.02);
+}
+
+.price-card.jp-model:hover {
+    border-color: rgba(0, 176, 255, 0.5);
+    box-shadow: 0 15px 40px rgba(0, 176, 255, 0.15);
+}
+
+.price-card.gold-model:hover {
+    border-color: rgba(255, 215, 0, 0.5);
+    box-shadow: 0 15px 40px rgba(255, 215, 0, 0.15);
+}
+
+.card-icon {
+    font-size: 48px;
+    margin-bottom: 20px;
+}
+
+.price-card h3 {
+    font-size: 24px;
+    margin-bottom: 15px;
+    color: var(--text-main);
+}
+
+.price-card p {
+    color: var(--text-muted);
+    font-size: 15px;
+    margin-bottom: 30px;
+    line-height: 1.5;
+}
+
+.select-btn {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text-main);
+    border: 1px solid var(--border-color);
+    padding: 12px 24px;
+    border-radius: 30px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+    margin-top: auto;
+}
+
+.price-card:hover .select-btn {
+    background: var(--text-main);
+    color: var(--bg-color);
+}
+
+.coming-soon {
+    text-align: center;
+    margin-top: 100px;
+    animation: fadeUp 0.6s ease-out forwards;
+}
+
+.coming-soon h2 {
+    font-size: 32px;
+    margin-bottom: 15px;
+}
+
+.coming-soon p {
+    color: var(--text-muted);
+    font-size: 18px;
+}
+
 /* Responsive Design for Mobile & Tablets */
 @media (max-width: 900px) {
     .metrics-row {
