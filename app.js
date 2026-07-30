@@ -1,32 +1,44 @@
+window.dashboardData = {
+    'trades-section': { balance: '$500.00', date: '' },
+    'gold-section': { balance: '$500.00', date: '' }
+};
+
 const jp225Trades = [
-    { date: 'June 9', pnl: 17 }, { date: 'June 9', pnl: 12 },
-    { date: 'June 11', pnl: -15 }, { date: 'June 15', pnl: 9 }, { date: 'June 17', pnl: 13 },
-    { date: 'June 17', pnl: 9.5 }, { date: 'June 17', pnl: 5 }, { date: 'June 17', pnl: 4 },
-    { date: 'June 18', pnl: 22 }, { date: 'June 18', pnl: 4 }, { date: 'June 19', pnl: -18.23 },
-    { date: 'June 20', pnl: 20 }, { date: 'June 20', pnl: -10 }, { date: 'June 25', pnl: 15 },
-    { date: 'June 25', pnl: 10 }, { date: 'June 26', pnl: -15 }, { date: 'June 29', pnl: 15 },
-    { date: 'June 29', pnl: 10 }, { date: 'June 30', pnl: -17 },
-    { date: 'July 2', pnl: 15 }, { date: 'July 2', pnl: -8 }, { date: 'July 3', pnl: -13 },
-    { date: 'July 6', pnl: 18 }, { date: 'July 6', pnl: -9 }, { date: 'July 7', pnl: -12 },
-    { date: 'July 8', pnl: -15 }, { date: 'July 9', pnl: -16.5 }, { date: 'July 10', pnl: 20 },
-    { date: 'July 10', pnl: -10 }, { date: 'July 14', pnl: 12 }, { date: 'July 14', pnl: -15 },
-    { date: 'July 15', pnl: 21 }, { date: 'July 15', pnl: 6 },
-    { date: 'July 16', pnl: -15 }, { date: 'July 17', pnl: 20 }, { date: 'July 17', pnl: 4 },
-    { date: 'July 17', pnl: 4 }, { date: 'July 17', pnl: -2 }, { date: 'July 21', pnl: 20 },
-    { date: 'July 21', pnl: -5 }, { date: 'July 23', pnl: 18 },
-    { date: 'July 23', pnl: 2 }, { date: 'July 24', pnl: 4 }, { date: 'July 28', pnl: 16 },
-    { date: 'July 28', pnl: 5 }, { date: 'July 29', pnl: 21 }, { date: 'July 30', pnl: 7 }
+    { date: 'Jun 9', pnl: 17 }, { date: 'Jun 9', pnl: 12 },
+    { date: 'Jun 11', pnl: -15 }, { date: 'Jun 15', pnl: 9 }, { date: 'Jun 17', pnl: 13 },
+    { date: 'Jun 17', pnl: 9.5 }, { date: 'Jun 17', pnl: 5 }, { date: 'Jun 17', pnl: 4 },
+    { date: 'Jun 18', pnl: 22 }, { date: 'Jun 18', pnl: 4 }, { date: 'Jun 19', pnl: -18.23 },
+    { date: 'Jun 20', pnl: 20 }, { date: 'Jun 20', pnl: -10 }, { date: 'Jun 25', pnl: 15 },
+    { date: 'Jun 25', pnl: 10 }, { date: 'Jun 26', pnl: -15 }, { date: 'Jun 29', pnl: 15 },
+    { date: 'Jun 29', pnl: 10 }, { date: 'Jun 30', pnl: -17 },
+    { date: 'Jul 2', pnl: 15 }, { date: 'Jul 2', pnl: -8 }, { date: 'Jul 3', pnl: -13 },
+    { date: 'Jul 6', pnl: 18 }, { date: 'Jul 6', pnl: -9 }, { date: 'Jul 7', pnl: -12 },
+    { date: 'Jul 8', pnl: -15 }, { date: 'Jul 9', pnl: -16.5 }, { date: 'Jul 10', pnl: 20 },
+    { date: 'Jul 10', pnl: -10 }, { date: 'Jul 14', pnl: 12 }, { date: 'Jul 14', pnl: -15 },
+    { date: 'Jul 15', pnl: 21 }, { date: 'Jul 15', pnl: 6 },
+    { date: 'Jul 16', pnl: -15 }, { date: 'Jul 17', pnl: 20 }, { date: 'Jul 17', pnl: 4 },
+    { date: 'Jul 17', pnl: 4 }, { date: 'Jul 17', pnl: -2 }, { date: 'Jul 21', pnl: 20 },
+    { date: 'Jul 21', pnl: -5 }, { date: 'Jul 23', pnl: 18 },
+    { date: 'Jul 23', pnl: 2 }, { date: 'Jul 24', pnl: 4 }, { date: 'Jul 28', pnl: 16 },
+    { date: 'Jul 28', pnl: 5 }, { date: 'Jul 29', pnl: 21 }, { date: 'Jul 30', pnl: 7 },
+    { date: 'Jul 27', pnl: 1.72 }, { date: 'Jul 27', pnl: -3.51 }, { date: 'Jul 27', pnl: -3.34 }, { date: 'Jul 27', pnl: 1.76 }, { date: 'Jul 27', pnl: 2.06 }, { date: 'Jul 27', pnl: 1.78 }, { date: 'Jul 27', pnl: 2.14 }, { date: 'Jul 27', pnl: 1.75 }, { date: 'Jul 27', pnl: 2.36 }, { date: 'Jul 27', pnl: 2.14 }, { date: 'Jul 27', pnl: 1.74 }, { date: 'Jul 27', pnl: -2.93 }, { date: 'Jul 27', pnl: -3.16 }, { date: 'Jul 27', pnl: 1.8 }, { date: 'Jul 27', pnl: -3.2 }, { date: 'Jul 27', pnl: -3.52 }, { date: 'Jul 27', pnl: -3.27 }, { date: 'Jul 27', pnl: -3.53 }, { date: 'Jul 27', pnl: 1.93 }, { date: 'Jul 27', pnl: 1.85 }, { date: 'Jul 27', pnl: 1.48 }, { date: 'Jul 27', pnl: 2.1 }, { date: 'Jul 27', pnl: 0.34 }, { date: 'Jul 27', pnl: 1.84 }, { date: 'Jul 27', pnl: 1.77 }, { date: 'Jul 27', pnl: 1.99 }, { date: 'Jul 27', pnl: -3.23 }, { date: 'Jul 27', pnl: -3.26 }, { date: 'Jul 27', pnl: -3.03 }, { date: 'Jul 27', pnl: -3.42 }, { date: 'Jul 27', pnl: -3.3 }, { date: 'Jul 27', pnl: -3.52 }, { date: 'Jul 27', pnl: -3.49 }, { date: 'Jul 27', pnl: -3.37 }, { date: 'Jul 27', pnl: 2.06 }, { date: 'Jul 27', pnl: 4.88 }, { date: 'Jul 27', pnl: 1.84 }, { date: 'Jul 27', pnl: 2.39 }, { date: 'Jul 27', pnl: 3.46 }, { date: 'Jul 27', pnl: 1.82 }, { date: 'Jul 27', pnl: 2.29 }, { date: 'Jul 27', pnl: 1.55 }, { date: 'Jul 27', pnl: 1.79 }, { date: 'Jul 27', pnl: 2.02 }, { date: 'Jul 27', pnl: 1.49 }, { date: 'Jul 27', pnl: 1.65 }, { date: 'Jul 27', pnl: 1.74 }, { date: 'Jul 27', pnl: 1.75 }, { date: 'Jul 29', pnl: -3.32 }, { date: 'Jul 29', pnl: -3.34 }, { date: 'Jul 29', pnl: 3.32 }, { date: 'Jul 29', pnl: 1.63 }, { date: 'Jul 29', pnl: -2.91 }, { date: 'Jul 29', pnl: 2.75 }, { date: 'Jul 29', pnl: 0.33 }, { date: 'Jul 29', pnl: 2.24 }, { date: 'Jul 29', pnl: 2.96 }, { date: 'Jul 29', pnl: 1.25 }, { date: 'Jul 29', pnl: 3.66 }, { date: 'Jul 29', pnl: -3.29 }, { date: 'Jul 29', pnl: -3.58 }, { date: 'Jul 29', pnl: 0.71 }, { date: 'Jul 29', pnl: 1.23 }, { date: 'Jul 29', pnl: 1.07 }, { date: 'Jul 29', pnl: 3.43 }, { date: 'Jul 29', pnl: -3.36 }, { date: 'Jul 29', pnl: -3.25 }, { date: 'Jul 29', pnl: -3.36 }, { date: 'Jul 29', pnl: -3.24 }, { date: 'Jul 29', pnl: -3.26 }, { date: 'Jul 29', pnl: -3.23 }, { date: 'Jul 29', pnl: -3.35 }, { date: 'Jul 29', pnl: -3.27 }, { date: 'Jul 29', pnl: -3.24 }, { date: 'Jul 29', pnl: 3.78 }, { date: 'Jul 29', pnl: 2.27 }, { date: 'Jul 29', pnl: 1.81 }, { date: 'Jul 29', pnl: 1.79 }, { date: 'Jul 29', pnl: 4.29 }, { date: 'Jul 29', pnl: 1.76 }, { date: 'Jul 29', pnl: -3.43 }, { date: 'Jul 29', pnl: 2.61 }, { date: 'Jul 29', pnl: 2.89 }, { date: 'Jul 29', pnl: -3.32 }, { date: 'Jul 29', pnl: 2.83 }, { date: 'Jul 29', pnl: 2.59 }, { date: 'Jul 29', pnl: 0.82 }, { date: 'Jul 29', pnl: 1.04 }, { date: 'Jul 29', pnl: 3.44 }, { date: 'Jul 29', pnl: 1.47 }, { date: 'Jul 29', pnl: 3.84 }, { date: 'Jul 29', pnl: 2.95 }, { date: 'Jul 29', pnl: 2.05 }, { date: 'Jul 29', pnl: 1.48 }, { date: 'Jul 29', pnl: 1.61 }, { date: 'Jul 29', pnl: 1.58 }, { date: 'Jul 29', pnl: -3.29 }, { date: 'Jul 29', pnl: -3.33 }, { date: 'Jul 29', pnl: -3.44 }, { date: 'Jul 29', pnl: 2.8 }, { date: 'Jul 29', pnl: 2.29 }, { date: 'Jul 29', pnl: -3.27 }, { date: 'Jul 29', pnl: 3.83 }, { date: 'Jul 29', pnl: 3.13 }, { date: 'Jul 29', pnl: 1.5 }, { date: 'Jul 29', pnl: 1.1 }, { date: 'Jul 29', pnl: 1.31 }, { date: 'Jul 29', pnl: 1.68 }, { date: 'Jul 29', pnl: 2.15 }, { date: 'Jul 29', pnl: 0.73 }, { date: 'Jul 29', pnl: 3.78 }, { date: 'Jul 29', pnl: 3.82 }, { date: 'Jul 29', pnl: 3.78 }
 ];
 
 const goldTrades = [
-    // Aapki Gold trades yahan aayengi (Example dummy trade niche diya hai, aap delete kar sakte ho)
-    // { date: 'Aug 1', pnl: 10 },
-    // { date: 'Aug 2', pnl: -5 }
+    { date: 'Jul 27', pnl: 1.72 }, { date: 'Jul 27', pnl: -3.51 }, { date: 'Jul 27', pnl: -3.34 }, { date: 'Jul 27', pnl: 1.76 }, { date: 'Jul 27', pnl: 2.06 }, { date: 'Jul 27', pnl: 1.78 }, { date: 'Jul 27', pnl: 2.14 }, { date: 'Jul 27', pnl: 1.75 }, { date: 'Jul 27', pnl: 2.36 }, { date: 'Jul 27', pnl: 2.14 }, { date: 'Jul 27', pnl: 1.74 }, { date: 'Jul 27', pnl: -2.93 }, { date: 'Jul 27', pnl: -3.16 }, { date: 'Jul 27', pnl: 1.8 }, { date: 'Jul 27', pnl: -3.2 }, { date: 'Jul 27', pnl: -3.52 }, { date: 'Jul 27', pnl: -3.27 }, { date: 'Jul 27', pnl: -3.53 }, { date: 'Jul 27', pnl: 1.93 }, { date: 'Jul 27', pnl: 1.85 }, { date: 'Jul 27', pnl: 1.48 }, { date: 'Jul 27', pnl: 2.1 }, { date: 'Jul 27', pnl: 0.34 }, { date: 'Jul 27', pnl: 1.84 }, { date: 'Jul 27', pnl: 1.77 }, { date: 'Jul 27', pnl: 1.99 }, { date: 'Jul 27', pnl: -3.23 }, { date: 'Jul 27', pnl: -3.26 }, { date: 'Jul 27', pnl: -3.03 }, { date: 'Jul 27', pnl: -3.42 }, { date: 'Jul 27', pnl: -3.3 }, { date: 'Jul 27', pnl: -3.52 }, { date: 'Jul 27', pnl: -3.49 }, { date: 'Jul 27', pnl: -3.37 }, { date: 'Jul 27', pnl: 2.06 }, { date: 'Jul 27', pnl: 4.88 }, { date: 'Jul 27', pnl: 1.84 }, { date: 'Jul 27', pnl: 2.39 }, { date: 'Jul 27', pnl: 3.46 }, { date: 'Jul 27', pnl: 1.82 }, { date: 'Jul 27', pnl: 2.29 }, { date: 'Jul 27', pnl: 1.55 }, { date: 'Jul 27', pnl: 1.79 }, { date: 'Jul 27', pnl: 2.02 }, { date: 'Jul 27', pnl: 1.49 }, { date: 'Jul 27', pnl: 1.65 }, { date: 'Jul 27', pnl: 1.74 }, { date: 'Jul 27', pnl: 1.75 }, { date: 'Jul 29', pnl: -3.32 }, { date: 'Jul 29', pnl: -3.34 }, { date: 'Jul 29', pnl: 3.32 }, { date: 'Jul 29', pnl: 1.63 }, { date: 'Jul 29', pnl: -2.91 }, { date: 'Jul 29', pnl: 2.75 }, { date: 'Jul 29', pnl: 0.33 }, { date: 'Jul 29', pnl: 2.24 }, { date: 'Jul 29', pnl: 2.96 }, { date: 'Jul 29', pnl: 1.25 }, { date: 'Jul 29', pnl: 3.66 }, { date: 'Jul 29', pnl: -3.29 }, { date: 'Jul 29', pnl: -3.58 }, { date: 'Jul 29', pnl: 0.71 }, { date: 'Jul 29', pnl: 1.23 }, { date: 'Jul 29', pnl: 1.07 }, { date: 'Jul 29', pnl: 3.43 }, { date: 'Jul 29', pnl: -3.36 }, { date: 'Jul 29', pnl: -3.25 }, { date: 'Jul 29', pnl: -3.36 }, { date: 'Jul 29', pnl: -3.24 }, { date: 'Jul 29', pnl: -3.26 }, { date: 'Jul 29', pnl: -3.23 }, { date: 'Jul 29', pnl: -3.35 }, { date: 'Jul 29', pnl: -3.27 }, { date: 'Jul 29', pnl: -3.24 }, { date: 'Jul 29', pnl: 3.78 }, { date: 'Jul 29', pnl: 2.27 }, { date: 'Jul 29', pnl: 1.81 }, { date: 'Jul 29', pnl: 1.79 }, { date: 'Jul 29', pnl: 4.29 }, { date: 'Jul 29', pnl: 1.76 }, { date: 'Jul 29', pnl: -3.43 }, { date: 'Jul 29', pnl: 2.61 }, { date: 'Jul 29', pnl: 2.89 }, { date: 'Jul 29', pnl: -3.32 }, { date: 'Jul 29', pnl: 2.83 }, { date: 'Jul 29', pnl: 2.59 }, { date: 'Jul 29', pnl: 0.82 }, { date: 'Jul 29', pnl: 1.04 }, { date: 'Jul 29', pnl: 3.44 }, { date: 'Jul 29', pnl: 1.47 }, { date: 'Jul 29', pnl: 3.84 }, { date: 'Jul 29', pnl: 2.95 }, { date: 'Jul 29', pnl: 2.05 }, { date: 'Jul 29', pnl: 1.48 }, { date: 'Jul 29', pnl: 1.61 }, { date: 'Jul 29', pnl: 1.58 }, { date: 'Jul 29', pnl: -3.29 }, { date: 'Jul 29', pnl: -3.33 }, { date: 'Jul 29', pnl: -3.44 }, { date: 'Jul 29', pnl: 2.8 }, { date: 'Jul 29', pnl: 2.29 }, { date: 'Jul 29', pnl: -3.27 }, { date: 'Jul 29', pnl: 3.83 }, { date: 'Jul 29', pnl: 3.13 }, { date: 'Jul 29', pnl: 1.5 }, { date: 'Jul 29', pnl: 1.1 }, { date: 'Jul 29', pnl: 1.31 }, { date: 'Jul 29', pnl: 1.68 }, { date: 'Jul 29', pnl: 2.15 }, { date: 'Jul 29', pnl: 0.73 }, { date: 'Jul 29', pnl: 3.78 }, { date: 'Jul 29', pnl: 3.82 }, { date: 'Jul 29', pnl: 3.78 }
 ];
 
-function initDashboard(rawTrades, containerId, chartId, symbolStr, startingBalance, subtitleText) {
+function initDashboard(rawTrades, containerId, chartId, symbolStr, startingBalance) {
     const container = document.getElementById(containerId);
     if (!container) return;
+
+    // Calculate dynamic date range
+    let dateRangeStr = 'No Data';
+    if (rawTrades.length > 0) {
+        const firstTradeDate = rawTrades[0].date;
+        const lastTradeDate = rawTrades[rawTrades.length - 1].date;
+        dateRangeStr = `${firstTradeDate} - ${lastTradeDate}`;
+    }
 
     // Enrich data
     const tradesData = [...rawTrades].reverse().map(trade => {
@@ -105,6 +117,12 @@ function initDashboard(rawTrades, containerId, chartId, symbolStr, startingBalan
     const pnlPercentage = ((totalPnl / startingBalance) * 100).toFixed(1);
     const maxDrawdownPercentage = ((maxDrawdownMoney / peakBalance) * 100).toFixed(2);
 
+    // Update global state for Header
+    window.dashboardData[containerId] = {
+        balance: '$' + balance.toFixed(2),
+        date: dateRangeStr
+    };
+
     // Update UI DOM Elements
     const pnlValElem = container.querySelector('.pnl-card .value');
     pnlValElem.innerText = (totalPnl >= 0 ? '+$' : '-$') + Math.abs(totalPnl).toFixed(2);
@@ -118,13 +136,14 @@ function initDashboard(rawTrades, containerId, chartId, symbolStr, startingBalan
     container.querySelector('.dd-card .subtitle').innerText = '-$' + maxDrawdownMoney.toFixed(2);
 
     container.querySelector('.trades-card .value').innerText = totalTrades;
-    container.querySelector('.trades-card .subtitle').innerText = subtitleText;
+    container.querySelector('.trades-card .subtitle').innerText = dateRangeStr;
 
     container.querySelector('.current-equity').innerText = 'Current: $' + balance.toFixed(2);
 
-    // Update Account Balance header (only do this for JP225 by default, or dynamic later)
+    // If this is the active tab on load, update header
     if (containerId === 'trades-section') {
-        document.querySelector('.balance-value').innerText = '$' + balance.toFixed(2);
+        document.querySelector('.balance-value').innerText = window.dashboardData[containerId].balance;
+        document.querySelector('.balance-date').innerText = window.dashboardData[containerId].date;
     }
 
     // 3. Init Chart
@@ -191,8 +210,8 @@ function initDashboard(rawTrades, containerId, chartId, symbolStr, startingBalan
 
 document.addEventListener('DOMContentLoaded', () => {
     // 1. Initialize JP225 Dashboard
-    initDashboard(jp225Trades, 'trades-section', 'equityChart', 'JP225Cash#', 500, 'June & July 2026');
+    initDashboard(jp225Trades, 'trades-section', 'equityChart', 'JP225Cash#', 500);
     
     // 2. Initialize Gold (XAUUSD) Dashboard
-    initDashboard(goldTrades, 'gold-section', 'goldChart', 'XAUUSD', 500, 'Coming Soon');
+    initDashboard(goldTrades, 'gold-section', 'goldChart', 'XAUUSD', 500);
 });
