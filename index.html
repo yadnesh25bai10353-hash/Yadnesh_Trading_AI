@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yadnesh Ai Bot - Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Chart.js for Equity Curve -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+<style>
+    /* Fullscreen Overlay Styling */
+    #intro-screen {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        z-index: 99999;
+        background-color: #000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: opacity 1s ease, visibility 1s ease;
+    }
+
+    /* Background Video Styling */
+    #bg-video {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        min-width: 100%;
+        min-height: 100%;
+        width: auto;
+        height: auto;
+        transform: translate(-50%, -50%);
+        object-fit: cover;
+        display: none; /* Initially hidden */
+    }
+
+    /* Overlay Card & Glow Effect */
+    .video-overlay-content {
+        position: relative;
+        z-index: 10;
+        text-align: center;
+        background: rgba(9, 10, 15, 0.5);
+        padding: 40px 60px;
+        border-radius: 20px;
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        box-shadow: 0 0 35px rgba(16, 185, 129, 0.25);
+    }
+
+    .video-overlay-content h1 {
+        font-family: 'Inter', sans-serif;
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: #ffffff;
+        margin-bottom: 25px;
+    }
+
+    /* Enter Dashboard Button */
+    .start-btn {
+        padding: 16px 36px;
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: #ffffff;
+        background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+        border: none;
+        border-radius: 30px;
+        cursor: pointer;
+        box-shadow: 0 0 20px rgba(16, 185, 129, 0.5);
+        transition: all 0.3s ease;
+    }
+
+    .start-btn:hover {
+        transform: scale(1.05);
+        box-shadow: 0 0 30px rgba(16, 185, 129, 0.8);
+    }
+</style>
+
+<div id="intro-screen">
+    <!-- Screen 1: Button Overlay -->
+    <div class="video-overlay-content" id="overlay-content">
+        <h1>Yadnesh Trading AI</h1>
+        <button class="start-btn" onclick="playIntroVideo()">Enter To Dashboard</button>
+    </div>
+    
+    <!-- Screen 2: Video Player -->
+    <video id="bg-video" playsinline>
+        <source src="intro.mp4" type="video/mp4">
+        Your browser does not support HTML5 video.
+    </video>
+</div>
+
+<script>
+    function playIntroVideo() {
+        var video = document.getElementById('bg-video');
+        var introScreen = document.getElementById('intro-screen');
+        var overlay = document.getElementById('overlay-content');
+        
+        // Hide the button card
+        overlay.style.display = 'none';
+        
+        // Show the video and play it
+        video.style.display = 'block';
+        video.muted = false;
+        video.play().catch(function(error) {
+            console.log("Play failed: ", error);
+        });
+
+        // Jab video khatam ho jaye, tab dashboard par jao
+        video.onended = function() {
+            introScreen.style.opacity = '0';
+            setTimeout(function() {
+                introScreen.style.visibility = 'hidden';
+            }, 1000); // 1 second fade out transition
+        };
+    }
+</script>
+
+    <div class="dashboard-container">
+        <!-- Header -->
+        <header>
+            <div class="logo">
+                <h1>Yadnesh Ai Bot</h1>
+            </div>
+            <div class="account-info">
+                <span class="balance-label">Account Balance:</span>
+                <span class="balance-value">$500.00</span>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main>
+            <!-- Top Metrics Row (Reference Image 2 style) -->
+            <section class="metrics-row">
+                <div class="metric-card pnl-card">
+                    <div class="card-header">
+                        <span class="icon">📈</span>
+                        <h3>Total PnL</h3>
+                    </div>
+                    <div class="value positive">+$24,567.89</div>
+                    <div class="subtitle">+15.4%</div>
+                </div>
+                <div class="metric-card winrate-card">
+                    <div class="card-header">
+                        <span class="icon">🎯</span>
+                        <h3>Overall Winrate</h3>
+                    </div>
+                    <div class="value">76.5%</div>
+                    <div class="subtitle">150 Wins / 46 Losses</div>
+                </div>
+                <div class="metric-card dd-card">
+                    <div class="card-header">
+                        <span class="icon">📉</span>
+                        <h3>Max Drawdown</h3>
+                    </div>
+                    <div class="value negative">-4.12%</div>
+                    <div class="subtitle">-$1,980.50</div>
+                </div>
+                <div class="metric-card trades-card">
+                    <div class="card-header">
+                        <span class="icon">📊</span>
+                        <h3>Total Trades</h3>
+                    </div>
+                    <div class="value">196</div>
+                    <div class="subtitle">This Month</div>
+                </div>
+            </section>
+
+            <!-- Chart Section (Equity Curve starting from 500) -->
+            <section class="chart-section">
+                <div class="section-header">
+                    <h2>Equity Growth</h2>
+                    <div class="chart-legend">
+                        <span class="current-equity">Current: $25,067.89</span>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <canvas id="equityChart"></canvas>
+                </div>
+            </section>
+
+            <!-- History Section (Reference Image 1 style: XM format) -->
+            <section class="history-section">
+                <div class="section-header">
+                    <h2>Trade History</h2>
+                    <div class="filters">
+                        <select id="monthFilter">
+                            <option value="last30">Last 30 days</option>
+                            <option value="july">July</option>
+                            <option value="june">June</option>
+                        </select>
+                        <select id="instrumentFilter">
+                            <option value="all">Instruments</option>
+                            <option value="jp225">JP225</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="history-list" id="tradeHistoryList">
+                    <!-- Javascript will populate this based on reference image 1 -->
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
