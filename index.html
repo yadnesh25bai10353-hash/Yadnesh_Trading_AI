@@ -157,6 +157,7 @@
         </div>
         <ul class="sidebar-links">
             <li onclick="showSection('trades')" id="menu-trades" class="active"><span class="icon">📈</span> Trades</li>
+            <li onclick="showSection('gold')" id="menu-gold"><span class="icon">🏆</span> Gold</li>
             <li onclick="showSection('inquiry')" id="menu-inquiry"><span class="icon">💬</span> Inquiry</li>
         </ul>
     </div>
@@ -251,6 +252,45 @@
             </section>
         </main>
 
+        <!-- Gold Section -->
+        <main id="gold-section" style="display: none;">
+            <section class="metrics-row">
+                <div class="metric-card pnl-card">
+                    <div class="card-header"><span class="icon">📈</span><h3>Total PnL</h3></div>
+                    <div class="value positive">+$0.00</div>
+                    <div class="subtitle">+0.0%</div>
+                </div>
+                <div class="metric-card winrate-card">
+                    <div class="card-header"><span class="icon">🎯</span><h3>Overall Winrate</h3></div>
+                    <div class="value">0.0%</div>
+                    <div class="subtitle">0 Wins / 0 Losses</div>
+                </div>
+                <div class="metric-card dd-card">
+                    <div class="card-header"><span class="icon">📉</span><h3>Max Drawdown</h3></div>
+                    <div class="value negative">-0.00%</div>
+                    <div class="subtitle">-$0.00</div>
+                </div>
+                <div class="metric-card trades-card">
+                    <div class="card-header"><span class="icon">📊</span><h3>Total Trades</h3></div>
+                    <div class="value">0</div>
+                    <div class="subtitle">Coming Soon</div>
+                </div>
+            </section>
+            <section class="chart-section">
+                <div class="section-header">
+                    <h2>Equity Growth</h2>
+                    <div class="chart-legend"><span class="current-equity">Current: $500.00</span></div>
+                </div>
+                <div class="chart-container"><canvas id="goldChart"></canvas></div>
+            </section>
+            <section class="history-section">
+                <div class="section-header">
+                    <h2>Trade History</h2>
+                </div>
+                <div class="history-list" id="goldHistoryList"></div>
+            </section>
+        </main>
+
         <!-- Inquiry Section -->
         <main id="inquiry-section" style="display: none;">
             <div class="inquiry-container">
@@ -285,9 +325,11 @@
         }
         function showSection(section) {
             document.getElementById('trades-section').style.display = (section === 'trades') ? 'block' : 'none';
+            document.getElementById('gold-section').style.display = (section === 'gold') ? 'block' : 'none';
             document.getElementById('inquiry-section').style.display = (section === 'inquiry') ? 'block' : 'none';
             
             document.getElementById('menu-trades').classList.toggle('active', section === 'trades');
+            document.getElementById('menu-gold').classList.toggle('active', section === 'gold');
             document.getElementById('menu-inquiry').classList.toggle('active', section === 'inquiry');
             
             // hide sidebar on mobile after clicking
