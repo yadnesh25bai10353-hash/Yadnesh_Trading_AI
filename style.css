@@ -34,10 +34,18 @@
 }
 
 body {
-    background-color: var(--bg-color);
+    background: linear-gradient(125deg, #07090e 0%, #121826 50%, #05070a 100%);
+    background-size: 200% 200%;
+    animation: cosmicPulse 15s ease infinite;
     color: var(--text-main);
     position: relative;
     overflow-x: hidden;
+}
+
+@keyframes cosmicPulse {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 }
 
 /* Ambient Glowing Background Orbs */
@@ -80,10 +88,12 @@ header {
 
 .logo h1 {
     font-size: 28px;
-    font-weight: 700;
-    color: #fff;
+    font-weight: 800;
+    background: linear-gradient(135deg, #ffffff 0%, #7ee8fa 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
     letter-spacing: -0.5px;
-    text-shadow: 0 0 20px rgba(255,255,255,0.1);
+    text-shadow: 0 0 30px rgba(126, 232, 250, 0.2);
 }
 
 .account-info {
@@ -147,7 +157,28 @@ main > section {
     border-radius: var(--card-radius);
     border: 1px solid var(--border-color);
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease, border-color 0.3s ease;
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease, border-color 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Spotlight Effect */
+.metric-card::before, .price-card::before, .trade-item::before, .contact-item::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: radial-gradient(800px circle at var(--mouse-x, 0) var(--mouse-y, 0), rgba(255, 255, 255, 0.08), transparent 40%);
+    z-index: 0;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    pointer-events: none;
+}
+.metric-card:hover::before, .price-card:hover::before, .trade-item:hover::before, .contact-item:hover::before {
+    opacity: 1;
+}
+.metric-card > *, .price-card > *, .trade-item > *, .contact-item > * {
+    position: relative;
+    z-index: 1;
 }
 
 .metric-card:hover {
@@ -296,13 +327,16 @@ main > section {
     justify-content: space-between;
     align-items: center;
     border: 1px solid transparent;
-    transition: all 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    position: relative;
+    overflow: hidden;
 }
 
 .trade-item:hover {
-    background-color: rgba(255, 255, 255, 0.05);
-    border-color: rgba(255, 255, 255, 0.1);
-    transform: translateX(5px);
+    background-color: rgba(255, 255, 255, 0.04);
+    border-color: rgba(255, 255, 255, 0.15);
+    transform: translateX(8px) scale(1.01);
+    box-shadow: -5px 10px 20px rgba(0,0,0,0.2);
 }
 
 .trade-info {
@@ -583,10 +617,12 @@ main > section {
     flex-direction: column;
     align-items: center;
     text-align: center;
+    position: relative;
+    overflow: hidden;
 }
 
 .price-card:hover {
-    transform: translateY(-10px) scale(1.02);
+    transform: translateY(-10px) scale(1.03);
 }
 
 .price-card.jp-model:hover {

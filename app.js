@@ -216,3 +216,14 @@ document.addEventListener('DOMContentLoaded', () => {
     // 2. Initialize Gold (XAUUSD) Dashboard
     initDashboard(goldTrades, 'gold-section', 'goldChart', 'XAUUSD', 500);
 });
+
+// Spotlight Hover Effect for Premium Look
+document.addEventListener('mousemove', (e) => {
+    document.querySelectorAll('.metric-card, .price-card, .trade-item, .contact-item').forEach(card => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        card.style.setProperty('--mouse-x', `${x}px`);
+        card.style.setProperty('--mouse-y', `${y}px`);
+    });
+});
