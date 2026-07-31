@@ -158,6 +158,7 @@
         <ul class="sidebar-links">
             <li onclick="showSection('trades')" id="menu-trades" class="active"><span class="icon">📈</span> JP225_V4</li>
             <li onclick="showSection('gold')" id="menu-gold"><span class="icon">🏆</span> Gold_V2</li>
+            <li onclick="showSection('analysis')" id="menu-analysis"><span class="icon">🔬</span> Deep Analysis</li>
             <li onclick="showSection('prices')" id="menu-prices"><span class="icon">💎</span> Prices</li>
             <li onclick="showSection('inquiry')" id="menu-inquiry"><span class="icon">💬</span> Inquiry</li>
         </ul>
@@ -297,6 +298,24 @@
             </section>
         </main>
 
+        <!-- Deep Analysis Section -->
+        <main id="analysis-section" style="display: none;">
+            <div class="analysis-container">
+                <!-- Breadcrumbs -->
+                <div class="breadcrumb-nav" id="analysis-breadcrumbs">
+                    <span class="crumb active" onclick="renderAnalysisLevel(0)">Deep Analysis</span>
+                </div>
+                
+                <h2 class="section-title" id="analysis-title">Select Trading Model</h2>
+                <p class="section-subtitle" id="analysis-subtitle">Choose a model to dive deep into performance analytics</p>
+                
+                <!-- Dynamic Content Container -->
+                <div id="analysis-content" class="analysis-content-grid">
+                    <!-- Javascript will inject cards here -->
+                </div>
+            </div>
+        </main>
+
         <!-- Prices Section -->
         <main id="prices-section" style="display: none;">
             <div class="prices-container">
@@ -366,13 +385,13 @@
             document.getElementById('sidebar-overlay').classList.toggle('active');
         }
         function showSection(section) {
-            const sections = ['trades', 'gold', 'prices', 'inquiry', 'price-jp225', 'price-gold'];
+            const sections = ['trades', 'gold', 'analysis', 'prices', 'inquiry', 'price-jp225', 'price-gold'];
             sections.forEach(s => {
                 const el = document.getElementById(s + '-section');
                 if (el) el.style.display = (section === s) ? 'block' : 'none';
             });
             
-            const menus = ['trades', 'gold', 'prices', 'inquiry'];
+            const menus = ['trades', 'gold', 'analysis', 'prices', 'inquiry'];
             menus.forEach(s => {
                 const menuBtn = document.getElementById('menu-' + s);
                 if (menuBtn) {

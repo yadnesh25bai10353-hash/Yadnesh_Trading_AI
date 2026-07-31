@@ -222,11 +222,231 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Spotlight Hover Effect for Premium Look
 document.addEventListener('mousemove', (e) => {
-    document.querySelectorAll('.metric-card, .price-card, .trade-item, .contact-item').forEach(card => {
+    document.querySelectorAll('.metric-card, .price-card, .trade-item, .contact-item, .analysis-card').forEach(card => {
         const rect = card.getBoundingClientRect();
         const x = e.clientX - rect.left;
         const y = e.clientY - rect.top;
         card.style.setProperty('--mouse-x', `${x}px`);
         card.style.setProperty('--mouse-y', `${y}px`);
     });
+});
+
+// --- Deep Analysis Feature ---
+let analysisState = {
+    level: 0, // 0: Models, 1: Months, 2: Weeks, 3: Days, 4: Report
+    modelName: '',
+    data: [], // All trades for selected model
+    month: '',
+    week: '',
+    day: ''
+};
+
+function renderAnalysisLevel(level, param = null, data = null) {
+    const content = document.getElementById('analysis-content');
+    const title = document.getElementById('analysis-title');
+    const subtitle = document.getElementById('analysis-subtitle');
+    const breadcrumbs = document.getElementById('analysis-breadcrumbs');
+    
+    analysisState.level = level;
+    
+    // Helper to calculate stats
+    const calcStats = (trades) => {
+        let pnl = 0, wins = 0, losses = 0;
+        trades.forEach(t => {
+            pnl += t.pnl;
+            if(t.pnl >= 0) wins++; else losses++;
+        });
+        const winrate = trades.length > 0 ? ((wins/trades.length)*100).toFixed(1) : 0;
+        return { pnl, wins, losses, winrate, total: trades.length };
+    };
+
+    if (level === 0) {
+        // Model Selection
+        title.innerText = "Select Trading Model";
+        subtitle.innerText = "Choose a model to dive deep into performance analytics";
+        breadcrumbs.innerHTML = `<span class="crumb active" onclick="renderAnalysisLevel(0)">Deep Analysis</span>`;
+        
+        content.innerHTML = `
+            <div class="analysis-card" onclick="renderAnalysisLevel(1, 'JP225_V4', jp225Trades)">
+                <div class="card-icon" style="font-size: 40px; margin-bottom: 15px;">📈</div>
+                <h3>JP225_V4 Model</h3>
+                <div class="stat-row"><span>Total Trades</span><span class="stat-val">${jp225Trades.length}</span></div>
+            </div>
+            <div class="analysis-card" onclick="renderAnalysisLevel(1, 'Gold_V2', goldTrades)">
+                <div class="card-icon" style="font-size: 40px; margin-bottom: 15px;">🏆</div>
+                <h3>Gold_V2 Model</h3>
+                <div class="stat-row"><span>Total Trades</span><span class="stat-val">${goldTrades.length}</span></div>
+            </div>
+        `;
+    } 
+    else if (level === 1) {
+        // Month Selection
+        if(param) { analysisState.modelName = param; analysisState.data = data; }
+        
+        title.innerText = "Monthly Analysis";
+        subtitle.innerText = `Select a month for ${analysisState.modelName}`;
+        breadcrumbs.innerHTML = `
+            <span class="crumb" onclick="renderAnalysisLevel(0)">Deep Analysis</span>
+            <span class="crumb active" onclick="renderAnalysisLevel(1)">${analysisState.modelName}</span>
+        `;
+        
+        // Group by Month
+        const months = {};
+        analysisState.data.forEach(t => {
+            const m = t.date.split(' ')[0];
+            if(!months[m]) months[m] = [];
+            months[m].push(t);
+        });
+        
+        let html = '';
+        for(let m in months) {
+            const stats = calcStats(months[m]);
+            const pClass = stats.pnl >= 0 ? 'positive' : 'negative';
+            const pSign = stats.pnl >= 0 ? '+' : '';
+            html += `
+                <div class="analysis-card" onclick="renderAnalysisLevel(2, '${m}')">
+                    <h3>${m} 2026</h3>
+                    <div class="stat-row"><span>Net PnL</span><span class="stat-val ${pClass}">${pSign}$${Math.abs(stats.pnl).toFixed(2)}</span></div>
+                    <div class="stat-row"><span>Win Rate</span><span class="stat-val">${stats.winrate}%</span></div>
+                    <div class="stat-row"><span>Total Trades</span><span class="stat-val">${stats.total}</span></div>
+                </div>
+            `;
+        }
+        content.innerHTML = html;
+    }
+    else if (level === 2) {
+        // Week Selection
+        if(param) analysisState.month = param;
+        
+        title.innerText = "Weekly Analysis";
+        subtitle.innerText = `Performance breakdown for ${analysisState.month} 2026`;
+        breadcrumbs.innerHTML = `
+            <span class="crumb" onclick="renderAnalysisLevel(0)">Deep Analysis</span>
+            <span class="crumb" onclick="renderAnalysisLevel(1)">${analysisState.modelName}</span>
+            <span class="crumb active" onclick="renderAnalysisLevel(2)">${analysisState.month}</span>
+        `;
+        
+        const monthTrades = analysisState.data.filter(t => t.date.startsWith(analysisState.month));
+        const weeks = { 'Week 1':[], 'Week 2':[], 'Week 3':[], 'Week 4':[], 'Week 5':[] };
+        monthTrades.forEach(t => {
+            const d = parseInt(t.date.split(' ')[1]);
+            let w = 'Week 1';
+            if (d > 7 && d <= 14) w = 'Week 2';
+            else if (d > 14 && d <= 21) w = 'Week 3';
+            else if (d > 21 && d <= 28) w = 'Week 4';
+            else if (d > 28) w = 'Week 5';
+            weeks[w].push(t);
+        });
+        
+        let html = '';
+        for(let w in weeks) {
+            if(weeks[w].length === 0) continue;
+            const stats = calcStats(weeks[w]);
+            const pClass = stats.pnl >= 0 ? 'positive' : 'negative';
+            const pSign = stats.pnl >= 0 ? '+' : '';
+            html += `
+                <div class="analysis-card" onclick="renderAnalysisLevel(3, '${w}')">
+                    <h3>${w}</h3>
+                    <div class="stat-row"><span>Net PnL</span><span class="stat-val ${pClass}">${pSign}$${Math.abs(stats.pnl).toFixed(2)}</span></div>
+                    <div class="stat-row"><span>Win Rate</span><span class="stat-val">${stats.winrate}%</span></div>
+                    <div class="stat-row"><span>Total Trades</span><span class="stat-val">${stats.total}</span></div>
+                </div>
+            `;
+        }
+        content.innerHTML = html;
+    }
+    else if (level === 3) {
+        // Day Selection
+        if(param) analysisState.week = param;
+        
+        title.innerText = "Daily Analysis";
+        subtitle.innerText = `Select a specific date in ${analysisState.week}`;
+        breadcrumbs.innerHTML = `
+            <span class="crumb" onclick="renderAnalysisLevel(0)">Deep Analysis</span>
+            <span class="crumb" onclick="renderAnalysisLevel(1)">${analysisState.modelName}</span>
+            <span class="crumb" onclick="renderAnalysisLevel(2)">${analysisState.month}</span>
+            <span class="crumb active" onclick="renderAnalysisLevel(3)">${analysisState.week}</span>
+        `;
+        
+        const monthTrades = analysisState.data.filter(t => t.date.startsWith(analysisState.month));
+        const weekTrades = monthTrades.filter(t => {
+            const d = parseInt(t.date.split(' ')[1]);
+            let w = 'Week 1';
+            if (d > 7 && d <= 14) w = 'Week 2';
+            else if (d > 14 && d <= 21) w = 'Week 3';
+            else if (d > 21 && d <= 28) w = 'Week 4';
+            else if (d > 28) w = 'Week 5';
+            return w === analysisState.week;
+        });
+        
+        const days = {};
+        weekTrades.forEach(t => {
+            if(!days[t.date]) days[t.date] = [];
+            days[t.date].push(t);
+        });
+        
+        let html = '';
+        for(let d in days) {
+            const stats = calcStats(days[d]);
+            const pClass = stats.pnl >= 0 ? 'positive' : 'negative';
+            const pSign = stats.pnl >= 0 ? '+' : '';
+            html += `
+                <div class="analysis-card" onclick="renderAnalysisLevel(4, '${d}')">
+                    <h3>${d}</h3>
+                    <div class="stat-row"><span>Net PnL</span><span class="stat-val ${pClass}">${pSign}$${Math.abs(stats.pnl).toFixed(2)}</span></div>
+                    <div class="stat-row"><span>Win Rate</span><span class="stat-val">${stats.winrate}%</span></div>
+                    <div class="stat-row"><span>Total Trades</span><span class="stat-val">${stats.total}</span></div>
+                </div>
+            `;
+        }
+        content.innerHTML = html;
+    }
+    else if (level === 4) {
+        // Daily Report
+        if(param) analysisState.day = param;
+        
+        title.innerText = `Report: ${analysisState.day}`;
+        subtitle.innerText = `Detailed trade history for the day`;
+        breadcrumbs.innerHTML = `
+            <span class="crumb" onclick="renderAnalysisLevel(0)">Deep Analysis</span>
+            <span class="crumb" onclick="renderAnalysisLevel(1)">${analysisState.modelName}</span>
+            <span class="crumb" onclick="renderAnalysisLevel(2)">${analysisState.month}</span>
+            <span class="crumb" onclick="renderAnalysisLevel(3)">${analysisState.week}</span>
+            <span class="crumb active">${analysisState.day}</span>
+        `;
+        
+        const dayTrades = analysisState.data.filter(t => t.date === analysisState.day);
+        const stats = calcStats(dayTrades);
+        
+        let html = `
+            <div class="analysis-card" style="grid-column: 1 / -1; cursor: default; transform: none;">
+                <h3>Summary for ${analysisState.day}</h3>
+                <div class="stat-row"><span>Net PnL</span><span class="stat-val ${stats.pnl >= 0 ? 'positive':'negative'}">$${Math.abs(stats.pnl).toFixed(2)}</span></div>
+                <div class="stat-row"><span>Win Rate</span><span class="stat-val">${stats.winrate}% (${stats.wins}W / ${stats.losses}L)</span></div>
+                <hr style="border: 1px solid rgba(255,255,255,0.05); margin: 20px 0;">
+                <h4 style="text-align: left; margin-bottom: 15px;">All Trades:</h4>
+        `;
+        
+        dayTrades.forEach(t => {
+            const pClass = t.pnl >= 0 ? 'positive' : 'negative';
+            const pSign = t.pnl >= 0 ? '+' : '';
+            html += `
+                <div class="trade-item" style="margin-bottom: 8px; padding: 12px 20px;">
+                    <div class="trade-info">
+                        <span style="font-weight: 600;">${analysisState.modelName === 'Gold_V2' ? '🥇 XAUUSD' : '📈 JP225'}</span>
+                    </div>
+                    <div class="trade-pnl ${pClass}" style="font-size: 16px;">
+                        ${pSign}$${Math.abs(t.pnl).toFixed(2)}
+                    </div>
+                </div>
+            `;
+        });
+        html += `</div>`;
+        content.innerHTML = html;
+    }
+}
+
+// Initial render
+document.addEventListener('DOMContentLoaded', () => {
+    renderAnalysisLevel(0);
 });
